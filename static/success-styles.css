@@ -1,0 +1,48 @@
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'Work Sans', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: gray;
+}
+
+a:hover {
+    color: black;
+}
+
+h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+/* Nav */
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 400px;
+    margin: auto;
+}
+
+.nav-icon {
+    font-size: 23px;
+}
+
+
+/* Success Section */
+
+#success-section {
+    text-align: center;
+    padding: 30px;
+}
+
+.fa-circle-check {
+    font-size: 200px;
+    color: #9ADE7B;
+    margin-bottom: 15px;
+}

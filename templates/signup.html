@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Blizzard</title>
+        <!-- My Stylesheet -->
+        <link rel="stylesheet" href="../static/signup.css">
+
+        <!-- Fontawesome -->
+        <script src="https://kit.fontawesome.com/4b92c18dda.js" crossorigin="anonymous"></script>
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <main>
+            {% include "title.html" %}
+            <h1 class="header"> Sign Up </h1>
+            {% if error == "email": %}
+                <p class="error">Email Exists! You cannot use an existing email to sign up.</p>
+            {% elif error == "username": %}
+                <p class="error"> Username Exists! You cannot use an existing username to sign up.</p>
+            {% endif %}
+            <section id="form-section">
+                <form method="POST">
+                    <label for="name">
+                        Username:
+                        <input id="name" name="name" type="text" required>
+                    </label>
+                    <label for="email">
+                        Email:
+                        <input id="email" name="email" type="email" required>
+                    </label>
+                    <label for="password">
+                        Password:
+                        <input id="password" name="password" type="password" minlength="7" maxlength="12" required>
+                    </label>
+                    <input id="submit-but" type="submit">
+                </form>
+            </section>
+        </main>
+    </body>
+</html>

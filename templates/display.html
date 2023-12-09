@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Blizzard</title>
+
+        <!-- My Stylesheet -->
+        <link rel="stylesheet" href="../static/display-styles.css">
+
+        <!-- Fontawesome -->
+        <script src="https://kit.fontawesome.com/4b92c18dda.js" crossorigin="anonymous"></script>
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <main>
+            {% include "title.html" %}
+            <section id="main-section">
+
+                <h1 class="category"> {{ category }} </h1>
+                <div class="all-items flex flex-center-align flex-space-between">
+                    {% for num in range(data_len): %}
+                        <div class="item">
+                            <div class="item-img-div">
+                                <img class="item-img" src="{{ data[num].image_url }}" alt="Image">
+                            </div>
+                            <div class="item-txt-buts-div">
+                                <h3 class="brand-name"> {{ data[num].name }} </h3>
+                                <span class="price">{{ data[num].price }}</span>
+                                <div class="buttons">
+                                    {% if is_logged_in: %}
+                                        {% if in_cart < 10: %}
+                                            <a class="cart-but" role="button" href="{{ url_for('add_to_cart', cart_id=data[num].id) }}">Add to Cart <i class="fa-solid fa-cart-shopping"></i></a>
+                                        {% else: %}
+                                            <a class="cart-but" role="button" href="{{ url_for('too_many') }}">Add to Cart <i class="fa-solid fa-cart-shopping"></i></a>
+                                        {% endif %}
+                                        <a class="buy-but" role="button" href="{{ url_for('checkout', id_error=str_user_id + '*no_error' + product_ids[num]) }}">Buy Now</a>
+                                    {% else: %}
+                                        <a class="cart-but" role="button" href="{{ url_for('login', error='false') }}">Add to Cart <i class="fa-solid fa-cart-shopping"></i></a>
+                                        <a class="buy-but" role="button" href="{{ url_for('login', error='false') }}">Buy Now</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </main>
+    </body>
+</html>

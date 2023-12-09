@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Blizzard</title>
+        <!-- My Stylesheet -->
+        <link rel="stylesheet" href="../static/checkout-styles.css">
+
+        <!-- Fontawesome -->
+        <script src="https://kit.fontawesome.com/4b92c18dda.js" crossorigin="anonymous"></script>
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
+
+    </head>
+  <body>
+    {% include "title.html" %}
+    <main class="flex">
+        <section id="item-display-section">
+            <div class="total-div">
+                <h3 class="total-price"><span>Total:</span> ${{total_price}}</h3>
+            </div>
+            <div class="all-items">
+                {% for sub_data in data: %}
+                    <div class="item flex flex-center-align">
+                        <div class="item-img-div">
+                            <img class="item-img" src="{{ sub_data.url }}" alt="Image">
+                        </div>
+                        <div class="item-details">
+                            <p class="item-name">{{ sub_data.item }}</p>
+                            <div class="more-item-details flex">
+                                <span>Price: {{ sub_data.price }}</span>
+                                <span>Quantity: {{ sub_data.quantity }}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+        <section id="form-section">
+            <div class="google-pay-div">
+                <span>Pay with</span>
+                {% if data_len != 0 or url_value_3: %}
+                    <a href="#" class="google-pay-but flex flex-center-align">
+                        <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png"> Pay
+                    </a>
+                {% else: %}
+                    <a href="#" class="google-pay-but flex flex-center-align" style="pointer-events: none; opacity: 0.6;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png"> Pay
+                    </a>
+                {% endif %}
+                <div class="or flex flex-space-between flex-center-align">
+                    <div class="divider"></div>
+                    <span> OR </span>
+                    <div class="divider"></div>
+                </div>
+            </div>
+            {% for num in range(2): %}
+                {% for name in input_names[num]: %}
+                    {% if error == name: %}
+                        <p class="error">Invalid {{ name.title().replace('_', ' ') }}</p>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+
+            {% if error == 'expiration_date': %}
+                <p class="error">Invalid Expiration Date</p>
+            {% endif %}
+            <div class="delivery-form-div">
+                <h2 class="form-header">Delivery</h2>
+                <form method="POST">
+                    <section id="delivery-section">
+                        <div class="form-group country-div w-100">
+                            <label for="country">
+                                Country/Region:
+                                <select id="country" class="w-100"  name="countries" required>
+                                    {% for key in country_dict: %}
+                                        <option value="{{ key }}">{{ country_dict[key] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </label>
+                        </div>
+                        <div class="form-group name-surname-div m-flex-column flex flex-space-between w-100">
+                            {% if error != "first_name": %}
+                                <label for="first_name">
+                                    First Name:
+                                    <input id="first_name" class="m-w-100" type="text" name="first_name" value="{{ input_data.first_name }}" required>
+                                </label>
+                            {% else: %}
+                                <label for="first_name" style="color: red">
+                                    First Name:
+                                    <input id="first_name" class="m-w-100" type="text" name="first_name" style="border-color: red" value="" required>
+                                </label>
+                            {% endif %}
+
+                            {% if error != "last_name": %}
+                                <label for="last_name">
+                                    Last Name:
+                                    <input id="last_name" class="m-w-100" type="text" name="last_name" value="{{ input_data.last_name }}" required>
+                                </label>
+                            {% else: %}
+                                <label for="last_name" style="color: red">
+                                    Last Name:
+                                    <input id="last_name" class="m-w-100" type="text" name="last_name" style="border-color: red" required>
+                                </label>
+                            {% endif %}
+                        </div>
+                        <div class="form-group address w-100">
+                            <label for="address">
+                                Address:
+                                <input id="address" class="w-100"  type="text" name="address" value="{{ input_data.address }}" required>
+                            </label>
+                        </div>
+                        <div class="form-group city-province-postal-div m-flex-column flex flex-space-between w-100">
+                            {% if error != "city": %}
+                                <label for="city">
+                                    City:
+                                    <input id="city" class="m-w-100" type="text" name="city" value="{{ input_data.city }}" required>
+                                </label>
+                            {% else: %}
+                                <label for="city" style="color: red">
+                                    City:
+                                    <input id="city" class="m-w-100" type="text" name="city"  style="border-color: red" required>
+                                </label>
+                            {% endif %}
+
+                            {% if error != "province": %}
+                                <label for="province">
+                                    Province:
+                                    <input id="province" class="m-w-100" type="text" name="province" value="{{ input_data.province }}" required>
+                                </label>
+                            {% else: %}
+                                <label for="province" style="color: red">
+                                    Province:
+                                    <input id="province" class="m-w-100" type="text" name="province" style="border-color: red" required>
+                                </label>
+                            {% endif %}
+
+                            {% if error != "postal_code": %}
+                                <label for="postal-code">
+                                    Postal Code:
+                                    <input id="postal-code" class="m-w-100" type="text" name="postal-code" value="{{ input_data.postal_code }}" required>
+                                </label>
+                            {% else: %}
+                                <label for="postal-code" style="color: red">
+                                    Postal Code:
+                                    <input id="postal-code" class="m-w-100" type="text" name="postal-code"  style="border-color: red" required>
+                                </label>
+                            {% endif %}
+                        </div>
+                        <div class="form-group address w-100">
+                            {% if error != "phone_number": %}
+                                <label for="phone-number">
+                                    Phone Number:
+                                    <input id="phone-number" class="w-100" type="text" name="phone-number" value="{{ input_data.phone_number }}" required>
+                                </label>
+                            {% else: %}
+                                <label for="phone-number" style="color: red">
+                                    Phone Number:
+                                    <input id="phone-number" class="w-100" type="text" name="phone-number" style="border-color: red"  required>
+                                </label>
+                            {% endif %}
+                        </div>
+                    </section>
+                    <section id="payment-section">
+                       <div class="payment-header-description">
+                            <h2 class="form-header payment-header">Payment</h2>
+                            <p class="payment-description">All transactions are encrypted</p>
+                        </div>
+                        <div class="form-group payment w-100">
+                            <div class="card-display flex flex-space-between flex-center-align">
+                                <label>Credit Card</label>
+                                <div class="card-imgs flex">
+                                    <img src="https://cdn.shopify.com/shopifycloud/checkout-web/assets/0169695890db3db16bfe.svg" alt="card">
+                                    <img src="https://cdn.shopify.com/shopifycloud/checkout-web/assets/ae9ceec48b1dc489596c.svg" alt="card">
+                                    <img src="https://cdn.shopify.com/shopifycloud/checkout-web/assets/f11b90c2972f3811f2d5.svg" alt="card">
+                                    <img src="https://cdn.shopify.com/shopifycloud/checkout-web/assets/4cde67b4ecfa33d21851.svg" alt="card">
+                                </div>
+                            </div>
+                            <div class="card-info">
+                                <div class="form-group flex flex-center-align">
+                                    {% if error != "card_number": %}
+                                        <input id="card-number" class="w-100" type="text" name="card-number" placeholder="Card number" value="{{ input_data.card_number }}" required>
+                                        <div class="icon flex flex-align-center">
+                                            <i class="fa-solid fa-lock"></i>
+                                        </div>
+                                    {% else: %}
+                                        <input id="card-number" class="w-100" type="text" name="card-number" placeholder="Card number" style="border-color: red" required>
+                                        <div class="icon flex flex-align-center" style="border-color: red">
+                                            <i class="fa-solid fa-lock" style="color: red"></i>
+                                        </div>
+                                    {% endif %}
+
+                                </div>
+                                <div class="form-group ex_date-sec_code-div m-flex-column flex flex-space-between w-100">
+                                    {% if error != 'expiration_date': %}
+                                        <input id="ex-date" class="m-w-100" type="text" name="ex-date" placeholder="Expiration date (MM/YY)" maxlength="5" value="{{ input_data.expiration_date }}" required>
+                                    {% else: %}
+                                        <input id="ex-date" class="m-w-100" type="text" name="ex-date" placeholder="Expiration date (MM/YY)" style="border-color: red" maxlength="3" required>
+                                    {% endif %}
+
+                                    <div class="sec-code-div flex flex-center-align">
+                                        {% if error != "security_code": %}
+                                            <input id="sec-code" class="m-w-100" type="text" name="sec_code" placeholder="Security code" minlength="3" maxlength="3" value="{{ input_data.security_code }}" required>
+                                            <div class="icon sec-code-icon flex flex-align-center">
+                                                <span class="sec-code-icon flex flex-center-align">
+                                                    <i class="fa-solid fa-star-of-life"></i>
+                                                    <i class="fa-solid fa-star-of-life"></i>
+                                                    <i class="fa-solid fa-star-of-life"></i>
+                                                </span>
+                                            </div>
+                                        {% else: %}
+                                            <input id="sec-code" class="m-w-100" type="text" name="sec_code" placeholder="Security code" style="border-color: red" minlength="3" maxlength="3" required>
+                                            <div class="icon sec-code-icon flex flex-align-center" style="border-color: red">
+                                                <span class="sec-code-icon flex flex-center-align">
+                                                    <i class="fa-solid fa-star-of-life" style="color: red"></i>
+                                                    <i class="fa-solid fa-star-of-life" style="color: red"></i>
+                                                    <i class="fa-solid fa-star-of-life" style="color: red"></i>
+                                                </span>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group w-100">
+                                    {% if error != "card_name": %}
+                                        <input id="card-name" class="w-100" type="text" name="card-name" placeholder="Name on card" value="{{ input_data.name_on_card }}" required>
+                                    {% else: %}
+                                        <input id="card-name" class="w-100" type="text" name="card-name" placeholder="Name on card" style="border-color: red" required>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group w-100 checkbox-div">
+                                    <label for="sb-addr" class="flex flex-center-align">
+                                        <input id="sb-addr" type="checkbox" name="sb-addr" value="True" checked>
+                                        Use shipping address as billing address
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="remember-section">
+                        <h2 class="form-header">Remember me</h2>
+                        <fieldset class="form-group remember flex flex-center-align">
+                            <label for="remember-checkbox" class="flex flex-center-align">
+                                {% if input_data.remember: %}
+                                    <input id="remember-checkbox" type="checkbox" name="remember-checkbox" value="True" checked>
+                                {% else: %}
+                                    <input id="remember-checkbox" type="checkbox" name="remember-checkbox" value="True">
+                                {% endif %}
+                                Save my information for a faster checkout
+                            </label>
+                        </fieldset>
+                    </section>
+                    {% if data_len != 0 or url_value_3: %}
+                        <input id="pay-now" class="w-100" type="submit" value="Pay Now" >
+                    {% else: %}
+                        <input id="pay-now" class="w-100" type="submit" value="Pay Now" style="pointer-events: none; opacity: 0.6;">
+                    {% endif %}
+                </form>
+            </div>
+        </section>
+
+    </main>
+  </body>
+</html>

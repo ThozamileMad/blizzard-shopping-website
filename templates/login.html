@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Blizzard</title>
+        <!-- My Stylesheet -->
+        <link rel="stylesheet" href="../static/login.css">
+
+        <!-- Fontawesome -->
+        <script src="https://kit.fontawesome.com/4b92c18dda.js" crossorigin="anonymous"></script>
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <main>
+            {% include "title.html" %}
+            <h1 class="header"> Login </h1>
+            {% if error == "email": %}
+                <p class="error">Email not Found! You cannot use a non-existent email to log in.</p>
+            {% elif error == "password": %}
+                <p class="error"> Invalid Password! Please enter the correct password.</p>
+            {% endif %}
+            <section id="form-section">
+                <form method="POST">
+                    <label for="email">
+                        Email:
+                        <input id="email" name="email" type="email" required>
+                    </label>
+                    <label for="password">
+                        Password:
+                        <input id="password" name="password" type="password" minlength="7" maxlength="12" required>
+                    </label>
+                    <input id="submit-but" type="submit">
+                </form>
+            </section>
+        </main>
+    </body>
+</html>

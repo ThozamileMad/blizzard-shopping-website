@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Blizzard</title>
+
+        <!-- My Stylesheet -->
+        <link rel="stylesheet" href="../static/category-styles.css">
+
+        <!-- Fontawesome -->
+        <script src="https://kit.fontawesome.com/4b92c18dda.js" crossorigin="anonymous"></script>
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <main>
+            {% include "title.html" %}
+            <h1> Categories </h1>
+            <div class="all_cat flex flex-center-align">
+                {% for cat in categories: %}
+                    <div class="cat-div">
+                        <a class="cat-a" href="{{ url_for('display', cate=cat.lower()) }}">{{ cat }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </main>
+    </body>
+</html>

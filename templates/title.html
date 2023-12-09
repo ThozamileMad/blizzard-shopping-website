@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Blizzard</title>
+
+        <!-- My Stylesheet -->
+        <link rel="stylesheet" href="static/title-styles.css">
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@900&family=Rubik:wght@500&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <section id="title" role="region">
+            <nav class="flex flex-center-align flex-space-between">
+                <a class="home-link" href="{{ url_for('home') }}"> <h1 class="title">Blizzard</h1> </a>
+                <div class="title-buts">
+                    {% if show_login: %}
+                        <a class="log-in" href="{{ url_for('login', error='false') }}">Log In</a>
+                    {% elif show_signup: %}
+                        <a class="sign-up" href="{{ url_for('signup', error='false') }}">Sign Up</a>
+                    {% elif not is_logged_in: %}
+                        <a class="sign-up" href="{{ url_for('signup', error='false') }}">Sign Up</a>
+                        <a class="log-in" href="{{ url_for('login', error='false') }}">Log In</a>
+                    {% elif is_logged_in and show_logout: %}
+                        <a class="logout" href="{{ url_for('logout') }}">Logout</a>
+                    {% elif show_checkout_cart: %}
+                        <a class="checkout_cart" href="{{ url_for('cart', user_id=user_id, error='false') }}"> <img src="https://cdn-icons-png.flaticon.com/512/665/665865.png" alt="cart-img"></a>
+                    {% endif %}
+                </div>
+            </nav>
+            {% if is_logged_in and show_cart: %}
+                <div class="cart-but-div">
+                    <a class="user-cart-but" href="{{ url_for('cart', user_id=user_id) }}"> <i class="fa-solid fa-bag-shopping"></i> {{ in_cart }}</a>
+                </div>
+            {% endif %}
+            {% if show_search: %}
+                <form class="flex flex-center-align" method="POST">
+                    <input id="search" type="text" name="search">
+                    <button id="submit" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+            {% endif %}
+        </section>
+    </body>
+</html>

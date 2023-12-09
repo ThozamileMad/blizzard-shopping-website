@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Blizzard</title>
+
+        <!-- My Stylesheet -->
+        <link rel="stylesheet" href="../static/cart-styles.css">
+
+        <!-- Fontawesome -->
+        <script src="https://kit.fontawesome.com/4b92c18dda.js" crossorigin="anonymous"></script>
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@500&family=Rubik:wght@500&family=Work+Sans&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <main>
+            {% include "title.html" %}
+            <section id="main-content" role="region">
+                <h1 class="header"> Shopping Cart </h1>
+                <div class="total-price-div flex flex-center-align flex-space-between">
+                    <h3 class="total-price">Total: <span>${{ total_price }}</span></h3>
+                    {% if cart_length != 0: %}
+                        <a class="checkout-but" role="button" href="{{ url_for('checkout', id_error=str_user_id) }}"> Checkout </a>
+                    {% else: %}
+                        <a class="checkout-but" role="button" href="{{ url_for('checkout', id_error=str_user_id) }}" style="pointer-events: none; opacity: 0.6;"> Checkout </a>
+                    {% endif %}
+                </div>
+                <div class="all-items flex flex-center-align">
+                    {% for num in range(cart_length): %}
+                        <div class="item flex">
+                            <div class="item-img-div">
+                                <img class="item-img pad" src="{{ data[num]['url'] }}" alt="item">
+                            </div>
+                            <div class="col-items">
+                                <h3 class="brand-name pad">{{ data[num]['item'] }}</h3>
+                                <form method="POST">
+                                    <div class="qty-price flex flex-center-align flex-space-between">
+                                        <div class="quantity flex flex-center-align flex-space-between">
+                                            <span>
+                                                {% if data[num]['quantity'] != 1: %}
+                                                    <a id="subtract" class="qty-but" href="{{ url_for('subtract', id=user_id, product_id=data[num]['id']) }}">-</a>
+                                                {% else: %}
+                                                    <a id="subtract" class="qty-but" href="{{ url_for('subtract', id=user_id, product_id=data[num]['id']) }}" style="pointer-events: none;">-</a>
+                                                {% endif %}
+                                            </span>
+                                            <span class="qty-no qty-pad">{{ data[num]['quantity'] }}</span>
+                                            <span>
+                                                <a id="add"  class="qty-but" href="{{ url_for('add', id=user_id, product_id=data[num]['id']) }}">+</a>
+                                            </span>
+                                        </div>
+                                        <span class="price">{{ data[num]['price'] }}</span>
+                                        <a id="remove-but" href="{{ url_for('remove', id=user_id, product_id=data[num]['id']) }}"> Remove </a>
+                                    </div>
+                                </form>
+                            </div>
+                      </div>
+                    {% endfor %}
+                    {% if cart_length == 0: %}
+                        <h2 class="no-items">No Items in cart</h2>
+                    {% endif %}
+                </div>
+            </section>
+        </main>
+    </body>
+</html>

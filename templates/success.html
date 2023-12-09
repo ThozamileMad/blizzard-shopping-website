@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Thanks for your order!</title>
+
+  <!-- My Stylesheet -->
+  <link rel="stylesheet" href="../static/success-styles.css">
+
+  <!-- Fontawesome -->
+  <script src="https://kit.fontawesome.com/4b92c18dda.js" crossorigin="anonymous"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@500&family=Rubik:wght@500&family=Work+Sans&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  <nav class="icons">
+      <a class="return" href="{{ url_for('cart', user_id=id) }}"> <i class="fa-solid fa-arrow-left nav-icon"></i> </a>
+      <a class="home" href="{{ url_for('home') }}"> <i class="fa-solid fa-house nav-icon"></i> </a>
+  </nav>
+  <section id="success-section">
+    <i class="fa-regular fa-circle-check"></i>
+    <h1>Payment Successful</h1>
+    <p>Your items will delivered within 5 working days by a courier.</p>
+  </section>
+</body>
+</html>

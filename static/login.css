@@ -1,0 +1,107 @@
+body {
+    font-family: "Rubik", sans-serif;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Title Section */
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background-color: #FFC436;
+    height: 70px;
+    margin-bottom:
+}
+
+.title {
+    font-family: "Noto Serif", sans-serif;
+    font-size: 25px;
+    color: white;
+}
+
+.sign-up {
+    background-color: black;
+    color: white;
+    border-radius: 50px;
+    padding: 10px 20px;
+}
+
+.title-buts a:hover {
+    background-color: #FFA214;
+    color: white;
+}
+
+/* Form Section */
+
+.header, .error {
+    text-align: center;
+}
+.header {
+    font-weight: 300;
+}
+
+.error {
+    color: red;
+    margin: 30px 0;
+    font-size: large;
+}
+
+form {
+    margin: 0 auto;
+    width: 600px;
+    font-family: sans-serif;
+}
+
+label {
+    font-weight: 600;
+}
+
+
+label, label input {
+    display: block;
+    font-size: 17px;
+}
+
+label input {
+    width: 100%;
+    height: 2rem;
+    padding-left: 11px;
+    border-radius: 10px;
+    border: 2px solid #FFC436;
+    margin: 0.5rem 0 1rem 0;
+}
+
+
+#submit-but {
+    display: block;
+    margin: 0 auto;
+    padding: 13px 20px;
+    color: white;
+    background-color: black;
+    border: none;
+    font-size: 15px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+#submit-but:hover {
+    background-color: #FFA214;
+}
+
+
+/* Phone Media Query */
+@media (max-width: 500px) {
+    #form-section, .error {
+        padding: 0 35px;
+    }
+
+    form {
+        width: 100%;
+    }
+}

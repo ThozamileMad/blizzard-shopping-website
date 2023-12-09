@@ -1,0 +1,169 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --color1: #FFC436;
+    --border-radius1: 50px;
+}
+
+a {
+    text-decoration: none;
+    font-weight: 100;
+}
+
+body {
+    font-family: "Rubik", sans-serif;
+    margin: 0;
+}
+
+main {
+    text-align: center;
+}
+
+h1 {
+    font-weight: 300;
+}
+
+/* Custom Flex Class Selectors */
+
+.flex {
+    display: flex;
+}
+
+.flex-center-align {
+    align-items: center;
+}
+
+.flex-space-between {
+    justify-content: space-between;
+}
+
+/* Multi-selector-rules */
+.sign-up, .logout, .title-buts a:hover, .user-cart-but, #submit, .title, .buttons a {
+    color: white;
+}
+
+.sign-up, .logout, .user-cart-but, .buttons a:hover {
+    background-color: black;
+}
+
+.buttons, h1, .cart-but-div {
+    text-align: center;
+}
+
+.title-buts a:hover, .user-cart-but:hover {
+    background-color: #FFA214;
+}
+
+nav, #submit {
+    background-color: var(--color1);
+}
+
+.sign-up, .logout {
+    padding: 10px 20px;
+}
+
+.sign-up, .logout, .log-in {
+    border-radius: 50px;
+}
+
+/* Title Section */
+
+nav {
+    padding: 0 20px;
+    height: 70px;
+    margin-bottom: 30px;
+}
+
+.title {
+    font-family: "Noto Serif", sans-serif;
+    font-size: 25px;
+}
+
+.sign-up {
+    position: relative;
+    z-index: 5;
+    left: 35px;
+}
+
+.log-in {
+    background-color: white;
+    color: black;
+    padding: 10px 20px 10px 37px;
+}
+
+.user-cart-but {
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 100%;
+}
+
+.fa-bag-shopping {
+    font-size: 21px;
+}
+
+form {
+    justify-content: center;
+    margin: 30px 35px;
+}
+
+#search {
+    width: 350px;
+    height: 40px;
+    padding-left: 20px;
+    border: 2px solid var(--color1);
+    font-family: sans-serif;
+    border-radius: var(--border-radius1) 0 0 var(--border-radius1);
+    font-size: 17px;
+}
+
+#submit {
+    border: none;
+    padding: 5.5px 20px 5.5px 10px;
+    font-size: 25px;
+    border-radius: 0 var(--border-radius1) var(--border-radius1) 0;
+    cursor: pointer;
+}
+
+/* Categories */
+
+.all_cat {
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 1200px;
+    padding: 0 57px;
+    gap: 1px;
+}
+
+.cat-a {
+    width: 350px;
+    height: 100px;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 30px;
+    padding-top: 35px;
+    margin: auto 10px 17px auto;
+    color: black;
+    background-color: #EBF3E8;
+    box-shadow: 5px 5px 5px;
+}
+
+.cat-a:hover, .cat-a:active {
+    background-color: white;
+    color: #FFA214;
+    border-color: #FFA214;
+    box-shadow: none;
+}
+
+/* Phone and Tablet Media Query */
+@media (max-width: 1000px) {
+    /* Main Section */
+    .all_cat {
+        flex-direction: column;
+        text-align: center;
+        padding: 0;
+        width: 100%;
+        justify-content: center;
+    }
+}
